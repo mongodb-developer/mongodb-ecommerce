@@ -24,7 +24,7 @@ export default function Home() {
       const user = await app.logIn(credentials);
       let getProducts;
       if (query.cat) {
-        getProducts = await user.functions.getCategory(query.cat);
+        getProducts = await user.functions.getProductsByCategory(query.cat);
         setCategoryName(() => query.cat);
       } else {
         getProducts = await user.functions.getAllProducts();
