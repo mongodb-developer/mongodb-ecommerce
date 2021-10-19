@@ -95,7 +95,6 @@ export default function Home() {
     }
 
     if (auth0User) {
-      console.log("auth0 user");
       const accessToken = await fetch("/api/gettoken");
       const token = await accessToken.json();
       const credentials = Realm.Credentials.jwt(token.accessToken);
