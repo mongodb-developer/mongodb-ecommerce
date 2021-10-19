@@ -3,10 +3,10 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import * as Realm from "realm-web";
 
-import Header from "../../components/Header";
-import Container from "../../components/Container";
-import Footer from "../../components/Footer";
-import ProductDetail from "../../components/ProductDetail";
+import Header from "../../components/storefront/Header";
+import Container from "../../components/storefront/Container";
+import Footer from "../../components/storefront/Footer";
+import ProductDetail from "../../components/storefront/ProductDetail";
 
 const ProductDetails = () => {
   const [product, setProduct] = useState();
@@ -36,7 +36,7 @@ const ProductDetails = () => {
             <title>MongoDB E-Commerce Demo - {product.name}</title>
             <link rel="icon" href="/favicon.ico" />
           </Head>
-          <div className="bg-white w-full min-h-screen">
+          <div className="bg-white w-full min-h-screen flex flex-col h-screen">
             <Header />
             <Container>
               <ProductDetail product={product} />

@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowNarrowRightIcon } from "@heroicons/react/outline";
+import { CodeIcon } from "@heroicons/react/outline";
 
 const Hero = () => {
   return (
@@ -20,12 +20,14 @@ const Hero = () => {
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque
             atque recusandae ipsum odio possimus soluta!
           </p>
-          <Link href={`/products`}>
-            <button className="flex items-center mt-4 px-3 py-2 bg-green-600 text-white text-sm uppercase font-medium rounded hover:bg-green-500 focus:outline-none focus:bg-green-500">
-              <span>Shop Now</span>
-              <ArrowNarrowRightIcon className="w-5 h-5" />
-            </button>
-          </Link>
+          <button
+            id="joyrideHome"
+            className="flex items-center mt-4 px-3 py-2 bg-green-600 text-white text-sm uppercase font-medium rounded hover:bg-green-500 focus:outline-none focus:bg-green-500"
+          >
+            <CodeIcon className="w-5 h-5 mr-2" />
+            <span>Take a Tour of the Code!</span>
+            <CodeIcon className="w-5 h-5 ml-2" />
+          </button>
         </div>
       </div>
     </div>

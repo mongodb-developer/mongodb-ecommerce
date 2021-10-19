@@ -1,10 +1,30 @@
-import React from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { PlusCircleIcon, MinusCircleIcon } from "@heroicons/react/outline";
+import { useCartUpdate, useIsCartOpen, useUpdateCartOpen } from "../../context/CartContext";
 
 const ProductDetail = ({ product }) => {
+  const [qty, setQty] = useState(1);
+
+  const handleCartUpdate = useCartUpdate();
+  const isCartOpen = useIsCartOpen();
+  const setIsCartOpen = useUpdateCartOpen();
+
+  const handleAdd = () => {
+    setQty(qty + 1)
+  }
+
+  const handleSubtract = () => {
+    setQty(qty => qty > 1 ? qty - 1 : qty)
+  }
+
+  const updateCart = () => {
+    handleCartUpdate(product, qty);
+    if(!isCartOpen) setIsCartOpen();
+  }
+
   return (
-    <div className="md:flex md:items-center">
+    <div className="md:flex md:items-center flex-grow">
       <div className="w-full h-64 md:w-1/2 lg:h-96 relative">
         <Image
           src={product.image}
@@ -23,17 +43,17 @@ const ProductDetail = ({ product }) => {
             Count:
           </label>
           <div className="flex items-center mt-1">
-            <button className="text-gray-500 focus:outline-none focus:text-gray-600">
-              <PlusCircleIcon className="w-5 h-5" />
-            </button>
-            <span className="text-gray-700 text-lg mx-2">1</span>
-            <button className="text-gray-500 focus:outline-none focus:text-gray-600">
+            <button onClick={handleSubtract} className="text-gray-500 focus:outline-none focus:text-gray-600">
               <MinusCircleIcon className="w-5 h-5" />
+            </button>
+            <span className="text-gray-700 text-lg mx-2">{qty}</span>
+            <button onClick={handleAdd} className="text-gray-500 focus:outline-none focus:text-gray-600">
+              <PlusCircleIcon className="w-5 h-5" />
             </button>
           </div>
         </div>
         <div className="flex items-center mt-6">
-          <button className="px-8 py-2 bg-green-600 text-white text-sm font-medium rounded hover:bg-green-500 focus:outline-none focus:bg-green-500">
+          <button onClick={updateCart} className="px-8 py-2 bg-green-600 text-white text-sm font-medium rounded hover:bg-green-500 focus:outline-none focus:bg-green-500">
             Add To Cart
           </button>
         </div>

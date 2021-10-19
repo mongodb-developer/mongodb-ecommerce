@@ -2,12 +2,12 @@ import Head from "next/head";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import * as Realm from "realm-web";
-import Category from "../../components/Category";
-import Container from "../../components/Container";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
-import Pagination from "../../components/Pagination";
-import Products from "../../components/Products";
+import Category from "../../components/storefront/Category";
+import Container from "../../components/storefront/Container";
+import Footer from "../../components/storefront/Footer";
+import Header from "../../components/storefront/Header";
+import Pagination from "../../components/storefront/Pagination";
+import Products from "../../components/storefront/Products";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -30,7 +30,7 @@ export default function Home() {
   }, [query]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
+    <div className="flex flex-col items-center justify-center min-h-screen py-2 h-screen">
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />

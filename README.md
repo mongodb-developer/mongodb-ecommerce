@@ -11,9 +11,11 @@
 ## ToDo's
 
 - [ ] Define Schema
-- [ ] Sync Demo
 - [ ] Fake Data
-- [ ] Charts
+- [ ] Authentication
+- [ ] Cart
 - [ ] Build backend dashboard
+- [ ] Charts
+- [ ] Sync Demo
 - [ ] Data Lake
 - [ ] Online Archive

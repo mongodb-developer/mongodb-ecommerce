@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useUser } from '@auth0/nextjs-auth0';
 import Link from "next/link";
 import { useRouter } from "next/router";
 import * as Realm from "realm-web";
@@ -8,13 +9,17 @@ import {
   SearchIcon,
 } from "@heroicons/react/outline";
 import Cart from "./Cart";
+import UserMenu from "../dashboard/header/UserMenu";
+import { useIsCartOpen, useUpdateCartOpen } from "../../context/CartContext";
 
 const Header = () => {
+  const { user: auth0User, error, isLoading } = useUser();
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isCartOpen, setIsCartOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [autoComplete, setAutoComplete] = useState([]);
+  const isCartOpen = useIsCartOpen();
+  const setIsCartOpen = useUpdateCartOpen();
 
   useEffect(async () => {
     if (searchTerm.length) {
@@ -23,8 +28,8 @@ const Header = () => {
       const app = new Realm.App({ id: REALM_APP_ID });
       const credentials = Realm.Credentials.anonymous();
       try {
-        const user = await app.logIn(credentials);
-        const searchAutoComplete = await user.functions.searchAutoComplete(
+        const realmUser = await app.logIn(credentials);
+        const searchAutoComplete = await realmUser.functions.searchAutoComplete(
           searchTerm
         );
         setAutoComplete(() => searchAutoComplete);
@@ -62,7 +67,9 @@ const Header = () => {
                 MongoStore
               </div>
             </Link>
-            <div className="flex items-center justify-end w-full">
+
+            <div className="flex items-center justify-end w-full gap-4">
+              <UserMenu />
               <button className="text-gray-600 focus:outline-none mx-4 sm:mx-0">
                 <ShoppingCartIcon
                   onClick={() => setIsCartOpen(!isCartOpen)}
