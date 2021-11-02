@@ -5,7 +5,11 @@ const StyledCode = ({ codeString, lang }) => {
   if (!codeString) return null;
 
   return (
-    <SyntaxHighlighter language={lang} style={materialDark}>
+    <SyntaxHighlighter
+      language={lang}
+      style={materialDark}
+      className="syntaxhighlighter"
+    >
       {codeString}
     </SyntaxHighlighter>
   );

@@ -1,0 +1,6 @@
+.syntaxhighlighter,
+.syntaxhighlighter > pre {
+  overflow-y: auto !important;
+  overflow-x: auto !important;
+  max-height: 75vh;
+}

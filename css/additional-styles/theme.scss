@@ -8,7 +8,7 @@ button:focus,
 .form-select:focus,
 .form-checkbox:focus,
 .form-radio:focus {
-    // @apply outline-blue;
+  // @apply outline-blue;
 }
 
 .form-input,
@@ -17,8 +17,7 @@ button:focus,
 .form-select,
 .form-checkbox,
 .form-radio {
-
-    &:focus {
-        box-shadow: none !important;
-    }
+  &:focus {
+    box-shadow: none !important;
+  }
 }

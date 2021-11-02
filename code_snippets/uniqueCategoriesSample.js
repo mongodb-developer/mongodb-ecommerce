@@ -1,6 +1,12 @@
+const uniqueCategoriesSample = `import clientPromise from "../lib/mongodb";
 
-const uniqueCategoriesSample = 
-`let collection = context.services.get("mongodb-atlas").db("store").collection("products");
-return collection.distinct("category");`
+function getUniqueCategories() {
+  const client = await clientPromise;
+  const db = client.db("store");
+  const collection = db.collection("products");
+  const uniqueCategories = await collection.distinct("category").toArray();
+
+  return uniqueCategories;
+}`;
 
 export default uniqueCategoriesSample;

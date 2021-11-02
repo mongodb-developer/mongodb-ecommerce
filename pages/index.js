@@ -1,13 +1,8 @@
 import Head from "next/head";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import * as Realm from "realm-web";
 import { useUser } from "@auth0/nextjs-auth0";
-import Joyride, { ACTIONS, EVENTS, STATUS } from "react-joyride";
-
-import StyledCode from "../components/portal/StyledCode";
-import allProductsSample from "../code_snippets/allProductsSample";
-import uniqueCategoriesSample from "../code_snippets/uniqueCategoriesSample";
-import productExample from "../code_snippets/productExample";
+import { useSearch, useSetSearch } from "../context/SearchContext";
 
 import Category from "../components/storefront/Category";
 import Container from "../components/storefront/Container";
@@ -17,70 +12,12 @@ import Hero from "../components/storefront/Hero";
 import Pagination from "../components/storefront/Pagination";
 import Products from "../components/storefront/Products";
 
-const joyrideStylesWide = {
-  options: {
-    width: "75vw",
-    maxWidth: "75vw",
-  },
-};
-
-const joyrideSteps = [
-  {
-    title: "Welcome to the Store!",
-    target: "#joyrideHome",
-    content: "Take a tour of the <code />",
-  },
-  {
-    title: "All Products Query",
-    target: "#allProducts",
-    placement: "top-start",
-    placementBeacon: "top",
-    styles: joyrideStylesWide,
-    content: (
-      <>
-        <p>This is the Quiry API call to get all products:</p>
-        <StyledCode codeString={allProductsSample} lang="javascript" />
-      </>
-    ),
-  },
-  {
-    title: "Unique Categories Query",
-    target: "#uniqueCategories",
-    placement: "top-end",
-    placementBeacon: "right",
-    styles: joyrideStylesWide,
-    content: (
-      <>
-        <p>This is the Quiry API call to get all unique categories:</p>
-        <StyledCode codeString={uniqueCategoriesSample} lang="javascript" />
-      </>
-    ),
-  },
-  {
-    title: "Product JSON Document",
-    target: "#allProducts",
-    placement: "top-start",
-    placementBeacon: "top",
-    styles: joyrideStylesWide,
-    content: (
-      <>
-        <p>This is the JSON document structure for the products:</p>
-        <StyledCode
-          codeString={JSON.stringify(productExample, null, 2)}
-          lang="json"
-        />
-      </>
-    ),
-  },
-];
-
 export default function Home() {
   const { user: auth0User } = useUser();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [steps, setSteps] = useState(joyrideSteps);
-  const [run, setRun] = useState(true);
-  const categoryRef = useRef(null);
+  const searchTerm = useSearch();
+  const setSearchTerm = useSetSearch();
 
   useEffect(async () => {
     // add your Realm App Id to the .env.local file
@@ -111,22 +48,6 @@ export default function Home() {
     }
   }, []);
 
-  function handleJoyrideCallback({ action, index, status, type }) {
-    if (index === 2 && action === "update" && type === "tooltip") {
-      categoryRef.current.style.transform = "scale(1)";
-    }
-
-    if (index === 2 && action === "next" && type === "step:after") {
-      categoryRef.current.style.transform = "scale(0)";
-    }
-
-    if ([STATUS.FINISHED, STATUS.SKIPPED].includes(status)) {
-      setTimeout(() => {
-        setRun((run) => !run);
-      }, 500);
-    }
-  }
-
   return (
     <>
       {products && (
@@ -136,22 +57,13 @@ export default function Home() {
             <link rel="icon" href="/favicon.ico" />
           </Head>
           <div className="bg-white w-full min-h-screen">
-            <Joyride
-              run={run}
-              steps={steps}
-              showProgress={true}
-              continuous={true}
-              callback={handleJoyrideCallback}
-              disableScrolling={true}
-            />
-            <Header />
+            <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
             <Container>
               <Hero />
               <Category
                 category="Tech Wear"
                 categories={categories}
                 productCount={`${products.length} Products`}
-                categoryRef={categoryRef}
               />
               <Products products={products} />
               <Pagination />

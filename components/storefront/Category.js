@@ -1,15 +1,17 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { CodeIcon } from "@heroicons/react/outline";
+import { useCategory } from "../../context/CategoryContext";
 import Portal from "../portal/Portal";
 import StyledCode from "../../components/portal/StyledCode";
 import allProductsSample from "../../code_snippets/allProductsSample";
 import uniqueCategoriesSample from "../../code_snippets/uniqueCategoriesSample";
 
-const Category = ({ category, categories, productCount, categoryRef }) => {
+const Category = ({ category, categories, productCount }) => {
   const [portalOneIsOpen, setPortalOneIsOpen] = useState(false);
   const [portalTwoIsOpen, setPortalTwoIsOpen] = useState(false);
   const router = useRouter();
+  const categoryRef = useCategory();
   const handleSelect = (cat) => {
     router.push({
       pathname: `/products/category/${cat}`,
