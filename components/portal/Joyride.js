@@ -314,7 +314,7 @@ const joyrideSteps = [
         <p>
           This will show the code snippets for the underlying code of that item.
         </p>
-        <p>What do you think?</p>
+        <p>What do you think? </p>
       </>
     ),
   },
