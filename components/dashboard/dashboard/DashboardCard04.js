@@ -1,50 +1,49 @@
-import React from 'react';
-import BarChart from '../../charts/BarChart01';
-
-// Import utilities
-import { tailwindConfig } from '../../utils/Utils';
+import { useState, useEffect, useRef } from "react";
+import ChartsEmbedSDK from "@mongodb-js/charts-embed-dom";
 
 function DashboardCard04() {
+  const sdk = new ChartsEmbedSDK({
+    baseUrl: "https://charts.mongodb.com/charts-mongodb-e-commerce-pbnsa",
+  });
+  const chartDiv = useRef(null);
+  const [rendered, setRendered] = useState(false);
 
-  const chartData = {
-    labels: [
-      '12-01-2020', '01-01-2021', '02-01-2021',
-      '03-01-2021', '04-01-2021', '05-01-2021',
-    ],
-    datasets: [
-      // Light blue bars
-      {
-        label: 'Direct',
-        data: [
-          800, 1600, 900, 1300, 1950, 1700,
-        ],
-        backgroundColor: tailwindConfig().theme.colors.blue[400],
-        hoverBackgroundColor: tailwindConfig().theme.colors.blue[500],
-        barPercentage: 0.66,
-        categoryPercentage: 0.66,
-      },
-      // Blue bars
-      {
-        label: 'Indirect',
-        data: [
-          4900, 2600, 5350, 4800, 5200, 4800,
-        ],
-        backgroundColor: tailwindConfig().theme.colors.indigo[500],
-        hoverBackgroundColor: tailwindConfig().theme.colors.indigo[600],
-        barPercentage: 0.66,
-        categoryPercentage: 0.66,
-      },
-    ],
-  };
+  let chartId = "a3bc6d30-828b-4500-96c6-413b032a9531";
+  let width = "36vw";
+  let height = "24vw";
+  const [chart] = useState(
+    sdk.createChart({
+      chartId: chartId,
+      // height: height,
+      // width: width,
+      theme: "light",
+    })
+  );
+
+  useEffect(() => {
+    chart
+      .render(chartDiv.current)
+      .then(() => setRendered(true))
+      .catch((err) => console.log("Error during Charts rendering.", err));
+  }, [chart]);
+
+  // useEffect(() => {
+  //   if (rendered) {
+  //     chart
+  //       .setFilter(filter)
+  //       .catch((err) => console.log("Error while filtering.", err));
+  //   }
+  // }, [chart, filter, rendered]);
 
   return (
-    <div className="flex flex-col col-span-full sm:col-span-6 bg-white shadow-lg rounded-sm border border-gray-200">
-      <header className="px-5 py-4 border-b border-gray-100">
-        <h2 className="font-semibold text-gray-800">Direct VS Indirect</h2>
-      </header>
-      {/* Chart built with Chart.js 3 */}
-      {/* Change the height attribute to adjust the chart height */}
-      <BarChart data={chartData} width={595} height={248} />
+    <div
+      id="dashboardCard04"
+      className="w-max bg-white shadow-lg rounded-sm border border-gray-200"
+      style={{ width: "56%" }}
+    >
+      <div className="p-5 flex w-full relative">
+        <div className="w-full h-96" ref={chartDiv} />
+      </div>
     </div>
   );
 }

@@ -9,13 +9,19 @@ import searchSample from "../../code_snippets/searchSample";
 import datalakeSample from "../../code_snippets/datalakeSample";
 import chartsIframe from "../../code_snippets/chartsIframe";
 import chartsSDK from "../../code_snippets/chartsSDK";
+import chartAggregation from "../../code_snippets/chartAggregation";
 import { useCategory } from "../../context/CategoryContext";
 import { useSetSearch } from "../../context/SearchContext";
 import { CodeIcon } from "@heroicons/react/outline";
 
-const joyrideStylesWide = {
+const joyrideStylesExtraWide = {
   options: {
-    width: "75vw",
+    width: "50vw",
+  },
+};
+const joyrideStyleWide = {
+  options: {
+    width: "45vw",
   },
 };
 
@@ -30,7 +36,7 @@ const joyrideSteps = [
     target: "#allProducts",
     placement: "top-start",
     placementBeacon: "top",
-    styles: joyrideStylesWide,
+    styles: joyrideStylesExtraWide,
     content: (
       <>
         <p>
@@ -46,7 +52,7 @@ const joyrideSteps = [
     target: "#uniqueCategories",
     placement: "top-end",
     placementBeacon: "right",
-    styles: joyrideStylesWide,
+    styles: joyrideStylesExtraWide,
     content: (
       <>
         <p>
@@ -62,7 +68,7 @@ const joyrideSteps = [
     target: "#searchQuery",
     placement: "bottom",
     placementBeacon: "bottom",
-    styles: joyrideStylesWide,
+    styles: joyrideStylesExtraWide,
     content: (
       <>
         <p>
@@ -113,7 +119,7 @@ const joyrideSteps = [
     placementBeacon: "bottom",
     content: (
       <>
-        <p>Works!</p>
+        <p>It still works even though we misspelled the name!</p>
       </>
     ),
   },
@@ -122,10 +128,12 @@ const joyrideSteps = [
     target: "#allProducts",
     placement: "bottom-start",
     placementBeacon: "bottom",
-    styles: joyrideStylesWide,
+    styles: joyrideStylesExtraWide,
     content: (
       <>
-        <p>This is the JSON document structure for the products:</p>
+        <p>
+          This is an example of the JSON document structure for our products.
+        </p>
         <StyledCode
           codeString={JSON.stringify(productExample, null, 2)}
           lang="json"
@@ -165,7 +173,7 @@ const joyrideSteps = [
     target: "#productGrid",
     placement: "top-start",
     placementBeacon: "right",
-    styles: joyrideStylesWide,
+    styles: joyrideStylesExtraWide,
     content: (
       <>
         <p>
@@ -193,24 +201,24 @@ const joyrideSteps = [
     ),
   },
   {
-    title: "Atlas Charts",
-    target: "#atlasCharts",
-    placement: "top-start",
-    placementBeacon: "right",
-    styles: joyrideStylesWide,
+    title: "Atlas Charts - iFrame",
+    target: "#dashboardCard01",
+    placement: "bottom-start",
+    placementBeacon: "top",
+    styles: joyrideStylesExtraWide,
     content: (
       <>
-        <p>To get up and running quickly, use an iFrame.</p>
-        <StyledCode codeString={chartsIframe} lang="javascript" />
+        <p>To get up and running quickly, just use an iFrame.</p>
+        <StyledCode codeString={chartsIframe} lang="html" />
       </>
     ),
   },
   {
-    title: "Atlas Charts",
-    target: "#atlasCharts",
-    placement: "top-start",
-    placementBeacon: "right",
-    styles: joyrideStylesWide,
+    title: "Atlas Charts - Embedding SDK",
+    target: "#dashboardCard02",
+    placement: "left",
+    placementBeacon: "top",
+    styles: joyrideStyleWide,
     content: (
       <>
         <p>For more advanced functionality, use the embedding SDK.</p>
@@ -220,58 +228,60 @@ const joyrideSteps = [
   },
   {
     title: "Atlas Charts",
-    target: "#atlasCharts",
+    target: "#dashboardCard03",
     placement: "top-start",
-    placementBeacon: "right",
+    placementBeacon: "top",
     content: (
       <>
         <p>
-          If you’ve used the SDK, like I’ve done here, I can click into any
-          chart and interact with the data to focus my analysis.
+          If you’ve used the SDK, like I’ve done here, you can click into any
+          chart and interact with the data to focus your analysis.
         </p>
       </>
     ),
   },
   {
     title: "Atlas Charts",
-    target: "#atlasCharts",
-    placement: "top-start",
-    placementBeacon: "right",
+    target: "#dashboardCard04",
+    placement: "left",
+    placementBeacon: "top",
     content: (
       <>
         <p>
           Looking at another chart in my dashboard, you’ll notice that Charts
           supports a number of chart types for different visualization needs.
-          Here’s a [pick a chart type].
+          Here’s a stacked column chart.
         </p>
       </>
     ),
   },
   {
     title: "Atlas Charts",
-    target: "#atlasCharts",
+    target: "#dashboardCard05",
     placement: "top-start",
-    placementBeacon: "right",
+    placementBeacon: "top",
     content: (
       <>
         <p>
-          Here on the map, you can see a geospatial query being run ($geoNear)
-          to show you the nearest store locations
+          In this map, you can see a geospatial query being run using $geoNear
+          to show you the order totals by location and payment type.
         </p>
       </>
     ),
   },
   {
-    title: "Atlas Charts",
+    title: "Atlas Charts Aggregation Pipeline",
     target: "#atlasCharts",
     placement: "top-start",
     placementBeacon: "right",
+    styles: joyrideStylesExtraWide,
     content: (
       <>
         <p>
-          Here you can see aggregation pipelines built to showcase how the
+          Here you can see aggregation pipeline built to showcase how the
           eCommerce store is doing.
         </p>
+        <StyledCode codeString={chartAggregation} lang="json" />
       </>
     ),
   },
@@ -295,7 +305,6 @@ const joyrideSteps = [
     placement: "top-start",
     content: (
       <>
-        <p>What do you think?</p>
         <p>
           Throughout the site you will see code icons:
           <button className="z-10 p-2 rounded-full bg-green-600 text-white mx-5 hover:bg-green-500 focus:outline-none focus:bg-green-500">
@@ -305,6 +314,7 @@ const joyrideSteps = [
         <p>
           This will show the code snippets for the underlying code of that item.
         </p>
+        <p>What do you think?</p>
       </>
     ),
   },
@@ -343,11 +353,11 @@ const JoyrideComponent = () => {
                   setTimeout(() => {
                     setSearchTerm("mAngodb");
                   }, 500);
-                }, 500);
-              }, 500);
+                }, 400);
+              }, 300);
             }, 500);
-          }, 500);
-        }, 500);
+          }, 300);
+        }, 200);
       }, 500);
     }
 
@@ -358,7 +368,7 @@ const JoyrideComponent = () => {
     if (index === 5 && action === "update" && type === "tooltip") {
       setTimeout(() => {
         setStepIndex((idx) => idx + 1);
-      }, 4000);
+      }, 3000);
     }
 
     if (index === 7 && action === "next" && type === "step:after") {
@@ -367,6 +377,10 @@ const JoyrideComponent = () => {
 
     if (index === 10 && action === "next" && type === "step:after") {
       router.push("/dashboard");
+    }
+
+    if (index === 17 && action === "next" && type === "step:before") {
+      window.scrollTo(0, 0);
     }
 
     if (index === 18 && action === "next" && type === "step:after") {
@@ -396,6 +410,9 @@ const JoyrideComponent = () => {
       disableScrolling={true}
       stepIndex={stepIndex}
       debug={false}
+      scrollToFirstStep={true}
+      spotlightClicks={true}
+      disableOverlayClose={true}
     />
   );
 };

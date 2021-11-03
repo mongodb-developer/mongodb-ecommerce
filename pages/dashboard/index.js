@@ -8,11 +8,11 @@ import WelcomeBanner from "../../components/dashboard/dashboard/WelcomeBanner";
 // import DashboardAvatars from '../../components/dashboard/dashboard/DashboardAvatars';
 import FilterButton from "../../components/dashboard/actions/FilterButton";
 import Datepicker from "../../components/dashboard/actions/Datepicker";
-// import DashboardCard01 from '../components/dashboard/dashboard/DashboardCard01';
-// import DashboardCard02 from '../components/dashboard/dashboard/DashboardCard02';
-// import DashboardCard03 from '../components/dashboard/dashboard/DashboardCard03';
-// import DashboardCard04 from '../components/dashboard/dashboard/DashboardCard04';
-// import DashboardCard05 from '../components/dashboard/dashboard/DashboardCard05';
+import DashboardCard01 from "../../components/dashboard/dashboard/DashboardCard01";
+import DashboardCard02 from "../../components/dashboard/dashboard/DashboardCard02";
+import DashboardCard03 from "../../components/dashboard/dashboard/DashboardCard03";
+import DashboardCard04 from "../../components/dashboard/dashboard/DashboardCard04";
+import DashboardCard05 from "../../components/dashboard/dashboard/DashboardCard05";
 // import DashboardCard06 from '../components/dashboard/dashboard/DashboardCard06';
 // import DashboardCard07 from '../components/dashboard/dashboard/DashboardCard07';
 // import DashboardCard08 from '../components/dashboard/dashboard/DashboardCard08';
@@ -49,33 +49,35 @@ function Dashboard() {
             <WelcomeBanner />
 
             {/* Dashboard actions */}
-            <div className="sm:flex sm:justify-end sm:items-center mb-8">
-              {/* Left: Avatars */}
-              {/* <DashboardAvatars /> */}
+            {/* <div className="sm:flex sm:justify-end sm:items-center mb-8"> */}
+            {/* Left: Avatars */}
+            {/* <DashboardAvatars /> */}
 
-              {/* Right: Actions */}
-              <div className="grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">
-                {/* Filter button */}
-                <FilterButton />
-                {/* Datepicker built with flatpickr */}
-                <Datepicker />
-              </div>
-            </div>
+            {/* Right: Actions */}
+            {/* <div className="grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2"> */}
+            {/* Filter button */}
+            {/* <FilterButton /> */}
+            {/* Datepicker built with flatpickr */}
+            {/* <Datepicker /> */}
+            {/* </div> */}
+            {/* </div> */}
 
             {/* Cards */}
-            {/* <div className="grid grid-cols-12 gap-6"> */}
-            <div id="atlasCharts">
-              <img src="/images/charts.jpg" alt="charts" className="w-full" />
+            <div
+              id="atlasCharts"
+              className="flex flex-wrap gap-4 justify-between align-center w-full"
+            >
+              {/* <img src="/images/charts.jpg" alt="charts" className="w-full" /> */}
               {/* Line chart (Acme Plus) */}
-              {/* <DashboardCard01 /> */}
+              <DashboardCard01 />
               {/* Line chart (Acme Advanced) */}
-              {/* <DashboardCard02 /> */}
+              <DashboardCard02 />
               {/* Line chart (Acme Professional) */}
-              {/* <DashboardCard03 /> */}
+              <DashboardCard03 />
               {/* Bar chart (Direct vs Indirect) */}
-              {/* <DashboardCard04 /> */}
+              <DashboardCard04 />
               {/* Line chart (Real Time Value) */}
-              {/* <DashboardCard05 /> */}
+              <DashboardCard05 />
               {/* Doughnut chart (Top Countries) */}
               {/* <DashboardCard06 /> */}
               {/* Table (Top Channels) */}
