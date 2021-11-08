@@ -1,13 +1,41 @@
 import { useCart } from "../../context/CartContext";
-import {
-  XIcon,
-  ArrowNarrowRightIcon,
-} from "@heroicons/react/outline";
+import { XIcon, ArrowNarrowRightIcon } from "@heroicons/react/outline";
 import CartItem from "./CartItem";
+import { loadStripe } from "@stripe/stripe-js";
+import axios from "axios";
+
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+);
 
 const Cart = ({ isCartOpen, setIsCartOpen }) => {
   const cart = useCart();
-  
+
+  const handleCheckout = async () => {
+    const stripe = await stripePromise;
+    const lineItems = {
+      items: cart.map((item) => ({
+        price_data: {
+          currency: "usd",
+          product_data: {
+            name: item.name,
+          },
+          unit_amount: item.price * 100,
+        },
+        quantity: item.qty,
+      })),
+    };
+    const checkoutSession = await axios.post(
+      "/api/checkout_sessions",
+      lineItems
+    );
+    console.log(checkoutSession);
+    const result = await stripe.redirectToCheckout({
+      sessionId: checkoutSession.data.id,
+    });
+    console.log(result);
+  };
+
   return (
     <div
       className={`${
@@ -25,11 +53,10 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
       </div>
       <hr className="my-3" />
       {/* Items */}
-      {cart && cart.map(item => {
-        return (
-          <CartItem key={item._id} product={item} />
-        )
-      })}
+      {cart &&
+        cart.map((item) => {
+          return <CartItem key={item._id} product={item} />;
+        })}
       {/* Bottom Menu */}
       <div className="mt-8">
         <form className="flex items-center justify-center">
@@ -43,7 +70,10 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
           </button>
         </form>
       </div>
-      <a className="flex items-center justify-center mt-4 px-3 py-2 bg-green-600 text-white text-sm uppercase font-medium rounded hover:bg-green-500 focus:outline-none focus:bg-green-500 cursor-pointer">
+      <a
+        className="flex items-center justify-center mt-4 px-3 py-2 bg-green-600 text-white text-sm uppercase font-medium rounded hover:bg-green-500 focus:outline-none focus:bg-green-500 cursor-pointer"
+        onClick={() => handleCheckout()}
+      >
         <span>Chechout</span>
         <ArrowNarrowRightIcon className="w-5 h-5" />
       </a>
