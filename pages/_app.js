@@ -2,6 +2,7 @@ import { UserProvider } from "@auth0/nextjs-auth0";
 import { CartProvider } from "../context/CartContext";
 import { CategoryProvider } from "../context/CategoryContext";
 import { SearchProvider } from "../context/SearchContext";
+import { AddProductProvider } from "../context/AddProductContext";
 import Script from "next/script";
 
 import "tailwindcss/tailwind.css";
@@ -16,12 +17,14 @@ function MyApp({ Component, pageProps }) {
         <CartProvider>
           <SearchProvider>
             <CategoryProvider>
-              {/* <Script 
+              <AddProductProvider>
+                {/* <Script 
               src="https://cdn.jsdelivr.net/npm/shepherd.js@8.3.1/dist/js/shepherd.js"
               strategy="beforeInteractive"
             ></Script> */}
-              <Component {...pageProps} />
-              <JoyrideComponent />
+                <Component {...pageProps} />
+                <JoyrideComponent />
+              </AddProductProvider>
             </CategoryProvider>
           </SearchProvider>
         </CartProvider>

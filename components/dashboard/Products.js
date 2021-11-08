@@ -1,33 +1,51 @@
-import { useState } from 'react'
+import { useState } from "react";
 import Image from "next/image";
+import Portal from "../portal/Portal";
+import AddProduct from "../dashboard/AddProduct";
 
-const Products = ({product}) => {
-  const [name, setName] = useState(product.name)
-  const [price, setPrice] = useState(product.price)
-
-  const handleNameUpdate = (e) => {
-    setName(e.target.value)
-  }
-
-  const handlePriceUpdate = (e) => {
-    setPrice(e.target.value)
-  }
-
+const Products = ({ product, setProducts }) => {
+  const [portalIsOpen, setPortalIsOpen] = useState(false);
   return (
-    <div className="grid gap-6 pr-8 grid-cols-5 w-full items-center bg-white rounded-md shadow-md overflow-hidden">
-      <div className="flex items-end justify-end h-16 w-16 w-full bg-cover relative">
-        <Image
-          src={product.image}
-          alt={product.name}
-          layout="fill"
-          objectFit="cover"
-          className="absolute z-0"
-        />
+    <>
+      <div
+        className="product grid gap-6 pr-8 grid-cols-3 items-center bg-white rounded-md shadow-md hover:shadow-lg transition overflow-hidden cursor-pointer"
+        onClick={() => setPortalIsOpen(true)}
+      >
+        <div className="flex items-end justify-end h-24 w-24 w-full bg-cover relative">
+          {!product.image.includes("http") ? (
+            <Image
+              src={product.image}
+              alt={product.name}
+              layout="fill"
+              objectFit="cover"
+              className="absolute z-0"
+            />
+          ) : (
+            <div
+              className="bg-contain bg-top h-64 w-64"
+              style={{ backgroundImage: `url(${product.image})` }}
+            ></div>
+          )}
+        </div>
+        <div>
+          <h2 className="text-2xl">{product.name}</h2>
+          <p className="text-sm">{product.category}</p>
+        </div>
+        <div className="text-2xl">${product.price}</div>
       </div>
-      <input type="text" className="col-span-2 text-gray-800 text-lg uppercase border border-green-500 px-4 py-2" value={name} onChange={handleNameUpdate} />
-      <input type="number" className="col-span-2 text-gray-800 text-lg border border-green-500 px-4 py-2" value={price} onChange={handlePriceUpdate} />
-    </div>
-  )
-}
+      <Portal
+        open={portalIsOpen}
+        onClose={() => setPortalIsOpen(false)}
+        title="Edit Product"
+      >
+        <AddProduct
+          product={product}
+          setPortalIsOpen={setPortalIsOpen}
+          setProducts={setProducts}
+        />
+      </Portal>
+    </>
+  );
+};
 
-export default Products
+export default Products;

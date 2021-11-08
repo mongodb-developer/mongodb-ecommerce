@@ -152,7 +152,7 @@ const Header = ({ searchTerm, setSearchTerm }) => {
             <Portal
               open={portalIsOpen}
               onClose={() => setPortalIsOpen(false)}
-              title="Unique Categories"
+              title="Atlas Search Query with Fuzzy Matching"
             >
               <StyledCode codeString={searchSample} lang="javascript" />
             </Portal>

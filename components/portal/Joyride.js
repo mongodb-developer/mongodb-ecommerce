@@ -12,6 +12,7 @@ import chartsSDK from "../../code_snippets/chartsSDK";
 import chartAggregation from "../../code_snippets/chartAggregation";
 import { useCategory } from "../../context/CategoryContext";
 import { useSetSearch } from "../../context/SearchContext";
+import { useSetAddProduct } from "../../context/AddProductContext";
 import { CodeIcon } from "@heroicons/react/outline";
 
 const joyrideStylesExtraWide = {
@@ -119,7 +120,10 @@ const joyrideSteps = [
     placementBeacon: "bottom",
     content: (
       <>
-        <p>It still works even though we misspelled the name!</p>
+        <p>
+          Our search query still works even though we misspelled the name
+          because we included fuzzy matching!
+        </p>
       </>
     ),
   },
@@ -162,9 +166,29 @@ const joyrideSteps = [
     placementBeacon: "right",
     content: (
       <>
-        <p>
-          [<em>TODO: ADD/UPDATE/DELETE PRODUCT</em>]
-        </p>
+        <p>Let's add a new product to the store.</p>
+      </>
+    ),
+  },
+  {
+    title: "CRUD Products",
+    target: "#mainDiv",
+    placement: "top-start",
+    placementBeacon: "right",
+    content: (
+      <>
+        <p>We'll add a new item and save.</p>
+      </>
+    ),
+  },
+  {
+    title: "CRUD Products",
+    target: ".product:last-of-type",
+    placement: "top-start",
+    placementBeacon: "right",
+    content: (
+      <>
+        <p>Our product was added and the collection automatically refreshed.</p>
       </>
     ),
   },
@@ -327,6 +351,7 @@ const JoyrideComponent = () => {
   const router = useRouter();
   const categoryRef = useCategory();
   const setSearchTerm = useSetSearch();
+  const setAddProduct = useSetAddProduct();
 
   function handleJoyrideCallback({ action, index, status, type }) {
     if (index === 2 && action === "update" && type === "tooltip") {
@@ -375,15 +400,47 @@ const JoyrideComponent = () => {
       router.push("/dashboard/products");
     }
 
-    if (index === 10 && action === "next" && type === "step:after") {
+    if (index === 9 && action === "next" && type === "step:after") {
+      document.getElementById("addProduct").click();
+    }
+
+    if (index === 10 && action === "next" && type === "step:before") {
+      setTimeout(() => {
+        setAddProduct({
+          name: "New Product",
+          price: "",
+          category: "",
+        });
+        setTimeout(() => {
+          setAddProduct({
+            name: "New Product",
+            price: 49,
+            category: "",
+          });
+          setTimeout(() => {
+            setAddProduct({
+              name: "New Product",
+              price: 49,
+              category: "T-Shirt",
+            });
+            setTimeout(() => {
+              document.getElementById("addProductButton").click();
+              setStepIndex((idx) => idx + 1);
+            }, 2000);
+          }, 1000);
+        }, 1000);
+      }, 1000);
+    }
+
+    if (index === 12 && action === "next" && type === "step:after") {
       router.push("/dashboard");
     }
 
-    if (index === 17 && action === "next" && type === "step:before") {
+    if (index === 19 && action === "next" && type === "step:before") {
       window.scrollTo(0, 0);
     }
 
-    if (index === 18 && action === "next" && type === "step:after") {
+    if (index === 20 && action === "next" && type === "step:after") {
       router.push("/");
       setSearchTerm("");
     }

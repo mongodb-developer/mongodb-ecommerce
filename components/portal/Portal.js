@@ -5,8 +5,9 @@ const Portal = ({ open, onClose, title, children }) => {
 
   return createPortal(
     <div
+      id="portal"
       className="fixed w-full h-full top-0 left-0 flex items-center justify-center"
-      style={{ zIndex: 101 }}
+      style={{ zIndex: 99 }}
     >
       {/* Overlay */}
       <div className="absolute w-full h-full bg-gray-900 opacity-50 z-40" />

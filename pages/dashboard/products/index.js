@@ -4,11 +4,14 @@ import { withPageAuthRequired, useUser } from "@auth0/nextjs-auth0";
 import Sidebar from "../../../components/dashboard/Sidebar";
 import Header from "../../../components/dashboard/Header";
 import Product from "../../../components/dashboard/Products";
+import Portal from "../../../components/portal/Portal";
+import AddProduct from "../../../components/dashboard/AddProduct";
 
 function Products() {
   const { user, error, isLoading } = useUser();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [products, setProducts] = useState([]);
+  const [portalIsOpen, setPortalIsOpen] = useState(false);
 
   useEffect(async () => {
     const response = await fetch("/api/dashboard");
@@ -36,20 +39,37 @@ function Products() {
                 <button
                   id="addProduct"
                   className="px-8 py-2 bg-green-600 text-white text-sm font-medium rounded hover:bg-green-500 focus:outline-none focus:bg-green-500"
+                  onClick={() => setPortalIsOpen(true)}
                 >
                   Add
                 </button>
+                <Portal
+                  open={portalIsOpen}
+                  onClose={() => setPortalIsOpen(false)}
+                  title="Add Product"
+                >
+                  <AddProduct
+                    setPortalIsOpen={setPortalIsOpen}
+                    setProducts={setProducts}
+                  />
+                </Portal>
               </div>
             </div>
-            <div className="grid gap-6 pr-8 grid-cols-5 w-full items-center">
+            {/* <div className="grid gap-6 pr-8 grid-cols-5 w-full items-center">
               <h3>Image</h3>
               <h3 className="col-span-2">Product Name</h3>
               <h3 className="col-span-2">Product Price</h3>
+            </div> */}
+            <div className="grid grid-cols-2 gap-6">
+              {products &&
+                products.map((product) => (
+                  <Product
+                    key={product._id}
+                    product={product}
+                    setProducts={setProducts}
+                  />
+                ))}
             </div>
-            {products &&
-              products.map((product) => (
-                <Product key={product._id} product={product} />
-              ))}
           </div>
         </main>
       </div>
