@@ -1,4 +1,6 @@
-const allProductsSample = `import clientPromise from "../lib/mongodb";
+const allProductsSample = `// JavaScript Driver
+
+import clientPromise from "../lib/mongodb";
 
 function getAllProducts() {
   const client = await clientPromise;

@@ -1,4 +1,6 @@
-const chartsSDK = `import { useState, useEffect, useRef } from "react";
+const chartsSDK = `// Charts SDK example in React.js
+
+import { useState, useEffect, useRef } from "react";
 import ChartsEmbedSDK from "@mongodb-js/charts-embed-dom";
 
 function EmbeddedChart() {

@@ -10,6 +10,7 @@ import datalakeSample from "../../code_snippets/datalakeSample";
 import chartsIframe from "../../code_snippets/chartsIframe";
 import chartsSDK from "../../code_snippets/chartsSDK";
 import chartAggregation from "../../code_snippets/chartAggregation";
+import dataAPIsample from "../../code_snippets/dataAPIsample";
 import { useCategory } from "../../context/CategoryContext";
 import { useSetSearch } from "../../context/SearchContext";
 import { useSetAddProduct } from "../../context/AddProductContext";
@@ -42,7 +43,7 @@ const joyrideSteps = [
       <>
         <p>
           This is the query that displays the current results of all the items
-          we have for sale:
+          we have for sale.
         </p>
         <StyledCode codeString={allProductsSample} lang="javascript" />
       </>
@@ -58,7 +59,7 @@ const joyrideSteps = [
       <>
         <p>
           This is the query that provides unique categories to populate in our
-          category selector menu:
+          category selector menu.
         </p>
         <StyledCode codeString={uniqueCategoriesSample} lang="javascript" />
       </>
@@ -74,8 +75,15 @@ const joyrideSteps = [
       <>
         <p>
           This search bar lets you search across the products in our store using
-          Atlas Search, our embedded full-text search solution powered by Apache
-          Lucene. Notice that fuzzy search is enabled.
+          <a
+            href="https://www.mongodb.com/atlas/search"
+            target="_blank"
+            className="text-green-500 font-bold"
+          >
+            &nbsp;Atlas Search
+          </a>
+          , our embedded full-text search solution powered by Apache Lucene.
+          Notice that fuzzy search is enabled.
         </p>
         <StyledCode codeString={searchSample} lang="javascript" />
       </>
@@ -175,6 +183,11 @@ const joyrideSteps = [
     target: "#mainDiv",
     placement: "top-start",
     placementBeacon: "right",
+    styles: {
+      options: {
+        primaryColor: "#fff",
+      },
+    },
     content: (
       <>
         <p>We'll add a new item and save.</p>
@@ -193,6 +206,34 @@ const joyrideSteps = [
     ),
   },
   {
+    title: "Data API",
+    target: "#productGrid",
+    placement: "top-start",
+    placementBeacon: "right",
+    styles: joyrideStylesExtraWide,
+    content: (
+      <div className="flex flex-col gap-6">
+        <p>
+          In our examples, we have used the MongoDB JavaScript driver to access
+          our database.
+        </p>
+        <p>
+          A brand new way to access data is through the{" "}
+          <a
+            href="https://www.mongodb.com/data-api/"
+            target="_blank"
+            className="text-green-500 font-bold"
+          >
+            &nbsp;Data API
+          </a>
+          . No drivers needed!
+        </p>
+        <p>Here is an example of what that would look like.</p>
+        <StyledCode codeString={dataAPIsample} lang="javascript" />
+      </div>
+    ),
+  },
+  {
     title: "Atlas Data Lake",
     target: "#productGrid",
     placement: "top-start",
@@ -202,9 +243,16 @@ const joyrideSteps = [
       <>
         <p>
           Here you can see that we are bringing in data from AWS S3 buckets and
-          combining it with live cluster data using Atlas Data Lake. We’re able
-          to federate queries using a single endpoint to combine data across
-          both sources.
+          combining it with live cluster data using{" "}
+          <a
+            href="https://www.mongodb.com/atlas/data-lake"
+            target="_blank"
+            className="text-green-500 font-bold"
+          >
+            &nbsp;Atlas Data Lake
+          </a>
+          . We’re able to federate queries using a single endpoint to combine
+          data across both sources.
         </p>
         <StyledCode codeString={datalakeSample} lang="json" />
       </>
@@ -218,8 +266,14 @@ const joyrideSteps = [
     content: (
       <>
         <p>
-          Atlas Charts supports embedding charts directly within any website or
-          application.
+          <a
+            href="https://www.mongodb.com/products/charts"
+            target="_blank"
+            className="text-green-500 font-bold"
+          >
+            &nbsp;Atlas Charts
+          </a>{" "}
+          supports embedding charts directly within any website or application.
         </p>
       </>
     ),
@@ -339,6 +393,17 @@ const joyrideSteps = [
           This will show the code snippets for the underlying code of that item.
         </p>
         <p>What do you think? </p>
+        <p className="pt-6">
+          Interested in building out an app like this? Check out{" "}
+          <a
+            href="https://www.mongodb.com/atlas"
+            target="_blank"
+            className="text-green-500 font-bold"
+          >
+            &nbsp;MongoDB Atlas
+          </a>
+          !
+        </p>
       </>
     ),
   },
@@ -432,15 +497,15 @@ const JoyrideComponent = () => {
       }, 1000);
     }
 
-    if (index === 12 && action === "next" && type === "step:after") {
+    if (index === 13 && action === "next" && type === "step:after") {
       router.push("/dashboard");
     }
 
-    if (index === 19 && action === "next" && type === "step:before") {
+    if (index === 20 && action === "next" && type === "step:before") {
       window.scrollTo(0, 0);
     }
 
-    if (index === 20 && action === "next" && type === "step:after") {
+    if (index === 21 && action === "next" && type === "step:after") {
       router.push("/");
       setSearchTerm("");
     }

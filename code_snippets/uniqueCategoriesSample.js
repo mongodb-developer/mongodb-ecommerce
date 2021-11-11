@@ -1,4 +1,6 @@
-const uniqueCategoriesSample = `import clientPromise from "../lib/mongodb";
+const uniqueCategoriesSample = `// JavaScript Driver
+
+import clientPromise from "../lib/mongodb";
 
 function getUniqueCategories() {
   const client = await clientPromise;
