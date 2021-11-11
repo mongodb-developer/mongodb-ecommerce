@@ -365,14 +365,14 @@ const joyrideSteps = [
   },
   {
     title: "Atlas Charts",
-    target: "#atlasCharts",
+    target: "#timeChart",
     placement: "top-start",
     placementBeacon: "right",
     content: (
       <>
         <p>
-          With one click you can run a report that shows you your sales in the
-          past 3 months.
+          With one click you can modify a chart that shows you your top 10
+          products in the past 3, 6, or 12 months.
         </p>
       </>
     ),
