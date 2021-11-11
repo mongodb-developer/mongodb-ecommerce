@@ -1,7 +1,7 @@
 const dataAPIsample = `// No Driver!!
 
 async function getAllProducts() {
-  const response = await fetch(\`https://data.mongodb-api.com/app/\${APP_ID}/endpoint/v1/beta/action/find\`,
+  const response = await fetch(\`https://data.mongodb-api.com/app/data-zxdey/endpoint/v1/beta/action/find\`,
   {
     method: "POST"
     headers: {

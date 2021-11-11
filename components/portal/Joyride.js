@@ -220,15 +220,20 @@ const joyrideSteps = [
         <p>
           A brand new way to access data is through the{" "}
           <a
-            href="https://www.mongodb.com/data-api/"
+            href="https://docs.atlas.mongodb.com/api/data-api/"
             target="_blank"
             className="text-green-500 font-bold"
           >
-            &nbsp;Data API
+            Atlas Data API
           </a>
-          . No drivers needed!
+          . No drivers needed - it works just like other REST APIs you're
+          familiar with.
         </p>
-        <p>Here is an example of what that would look like.</p>
+        <p>
+          Here is an example of what that would look like. You can also use it
+          to integrate MongoDB with other services (such as Stripe or Auth0
+          which we've used in this tutorial).
+        </p>
         <StyledCode codeString={dataAPIsample} lang="javascript" />
       </div>
     ),
