@@ -537,7 +537,6 @@ const JoyrideComponent = () => {
       disableScrolling={true}
       stepIndex={stepIndex}
       debug={false}
-      scrollToFirstStep={true}
       spotlightClicks={true}
       disableOverlayClose={true}
     />

@@ -11,13 +11,23 @@ import Header from "../components/storefront/Header";
 import Hero from "../components/storefront/Hero";
 import Pagination from "../components/storefront/Pagination";
 import Products from "../components/storefront/Products";
+import Banner from "../components/storefront/Banner";
 
 export default function Home() {
   const { user: auth0User } = useUser();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [showBanner, setShowBanner] = useState();
   const searchTerm = useSearch();
   const setSearchTerm = useSetSearch();
+
+  useEffect(() => {
+    setShowBanner(() => JSON.parse(localStorage.getItem("banner")) ?? true);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("banner", showBanner);
+  }, [showBanner]);
 
   useEffect(async () => {
     // add your Realm App Id to the .env.local file
@@ -51,26 +61,29 @@ export default function Home() {
   return (
     <>
       {products && (
-        <div className="flex flex-col items-center justify-center min-h-screen py-2">
-          <Head>
-            <title>Create Next App</title>
-            <link rel="icon" href="/favicon.ico" />
-          </Head>
-          <div className="bg-white w-full min-h-screen">
-            <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-            <Container>
-              <Hero />
-              <Category
-                category="Tech Wear"
-                categories={categories}
-                productCount={`${products.length} Products`}
-              />
-              <Products products={products} />
-              <Pagination />
-            </Container>
-            <Footer />
+        <>
+          {showBanner && <Banner setShowBanner={setShowBanner} />}
+          <div className="flex flex-col items-center justify-center min-h-screen py-2">
+            <Head>
+              <title>Create Next App</title>
+              <link rel="icon" href="/favicon.ico" />
+            </Head>
+            <div className="bg-white w-full min-h-screen">
+              <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+              <Container>
+                <Hero />
+                <Category
+                  category="Tech Wear"
+                  categories={categories}
+                  productCount={`${products.length} Products`}
+                />
+                <Products products={products} />
+                <Pagination />
+              </Container>
+              <Footer />
+            </div>
           </div>
-        </div>
+        </>
       )}
     </>
   );
