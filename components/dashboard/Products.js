@@ -12,9 +12,9 @@ const Products = ({ product, setProducts }) => {
         onClick={() => setPortalIsOpen(true)}
       >
         <div className="flex items-end justify-end h-24 w-24 w-full bg-cover relative">
-          {!product.image.includes("http") ? (
+          {!product.imagePath.includes("http") ? (
             <Image
-              src={product.image}
+              src={product.imagePath}
               alt={product.name}
               layout="fill"
               objectFit="cover"
@@ -23,7 +23,7 @@ const Products = ({ product, setProducts }) => {
           ) : (
             <div
               className="bg-contain bg-top h-64 w-64"
-              style={{ backgroundImage: `url(${product.image})` }}
+              style={{ backgroundImage: `url(${product.imagePath})` }}
             ></div>
           )}
         </div>

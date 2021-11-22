@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import * as Realm from "realm-web";
+import { useSearch, useSetSearch } from "../../context/SearchContext";
 
 import Header from "../../components/storefront/Header";
 import Container from "../../components/storefront/Container";
@@ -11,6 +12,8 @@ import ProductDetail from "../../components/storefront/ProductDetail";
 const ProductDetails = () => {
   const [product, setProduct] = useState();
   const { query } = useRouter();
+  const searchTerm = useSearch();
+  const setSearchTerm = useSetSearch();
 
   useEffect(async () => {
     if (query.id) {
@@ -37,7 +40,7 @@ const ProductDetails = () => {
             <link rel="icon" href="/favicon.ico" />
           </Head>
           <div className="bg-white w-full min-h-screen flex flex-col h-screen">
-            <Header />
+            <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
             <Container>
               <ProductDetail product={product} />
             </Container>

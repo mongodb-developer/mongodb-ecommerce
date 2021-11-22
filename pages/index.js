@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import * as Realm from "realm-web";
 import { useUser } from "@auth0/nextjs-auth0";
 import { useSearch, useSetSearch } from "../context/SearchContext";
+import { useRouter } from "next/router";
 
 import Category from "../components/storefront/Category";
 import Container from "../components/storefront/Container";
@@ -12,6 +13,7 @@ import Hero from "../components/storefront/Hero";
 import Pagination from "../components/storefront/Pagination";
 import Products from "../components/storefront/Products";
 import Banner from "../components/storefront/Banner";
+import Portal from "../components/portal/Portal";
 
 export default function Home() {
   const { user: auth0User } = useUser();
@@ -20,6 +22,8 @@ export default function Home() {
   const [showBanner, setShowBanner] = useState();
   const searchTerm = useSearch();
   const setSearchTerm = useSetSearch();
+  const [portalIsOpen, setPortalIsOpen] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     setShowBanner(() => JSON.parse(localStorage.getItem("banner")) ?? true);
@@ -50,11 +54,19 @@ export default function Home() {
 
     try {
       const allProducts = await realmUser.functions.getAllProducts();
-      setProducts(() => allProducts);
+      const filteredProducts = allProducts.filter(
+        (product) => product.category !== "Apparel"
+      );
+      setProducts(() => filteredProducts);
       const uniqueCategories = await realmUser.functions.getUniqueCategories();
       setCategories(() => uniqueCategories);
     } catch (error) {
       console.error(error);
+    }
+
+    const query = new URLSearchParams(window.location.search);
+    if (query.get("success")) {
+      setPortalIsOpen(true)
     }
   }, []);
 
@@ -81,6 +93,16 @@ export default function Home() {
                 <Pagination />
               </Container>
               <Footer />
+              <Portal
+                open={portalIsOpen}
+                onClose={() => {
+                  setPortalIsOpen(false);
+                  router.push("/");
+                }}
+                title="Order Placed!"
+              >
+                <p className="p-6">Thank you for your order.</p>
+              </Portal>
             </div>
           </div>
         </>

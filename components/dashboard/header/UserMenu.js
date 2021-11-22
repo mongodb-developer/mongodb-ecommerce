@@ -42,6 +42,7 @@ function UserMenu() {
       <a
         className="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0"
         href="/api/auth/login"
+        id="authLogin"
       >
         Login
       </a>
@@ -56,6 +57,7 @@ function UserMenu() {
         aria-haspopup="true"
         onClick={() => setDropdownOpen(!dropdownOpen)}
         aria-expanded={dropdownOpen}
+        id="authLogin"
       >
         <img
           className="w-8 h-8 rounded-full"

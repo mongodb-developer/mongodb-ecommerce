@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useState, useEffect } from "react";
 import * as Realm from "realm-web";
 import { useUser } from "@auth0/nextjs-auth0";
+import { useSearch, useSetSearch } from "../../context/SearchContext";
 
 import Category from "../../components/storefront/Category";
 import Container from "../../components/storefront/Container";
@@ -14,6 +15,8 @@ export default function Home() {
   const { user: auth0User } = useUser();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
+  const searchTerm = useSearch();
+  const setSearchTerm = useSetSearch();
 
   useEffect(async () => {
     // add your Realm App Id to the .env.local file
@@ -52,7 +55,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="bg-white w-full min-h-screen">
-        <Header />
+        <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         <Container>
           <Category
             category="All Products"

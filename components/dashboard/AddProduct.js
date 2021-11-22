@@ -25,9 +25,9 @@ const AddProduct = ({ product, setPortalIsOpen, setProducts }) => {
 
   useEffect(async () => {
     if (!productImage) {
-      const res = await fetch("/api/getimage");
-      const data = await res.json();
-      setProductImage(data.webformatURL);
+      const res = await fetch("/api/getimage?search=yellow+shirt");
+      const data = await res.text();
+      setProductImage(data);
     }
   }, []);
 
@@ -65,7 +65,7 @@ const AddProduct = ({ product, setPortalIsOpen, setProducts }) => {
           name: productName,
           price: productPrice,
           category: productCategory,
-          image: productImage,
+          imagePath: productImage,
           _id: productName,
         },
       ]);

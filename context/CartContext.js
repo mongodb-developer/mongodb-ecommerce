@@ -12,6 +12,7 @@ const testProduct = {
 };
 
 const CartContext = createContext();
+const CartEmpty = createContext();
 const CartUpdateContext = createContext();
 const CartAddContext = createContext();
 const CartSubtractContext = createContext();
@@ -21,6 +22,10 @@ const UpdateCartOpenContext = createContext();
 
 export function useCart() {
   return useContext(CartContext);
+}
+
+export function useCartEmpty() {
+  return useContext(CartEmpty);
 }
 
 export function useCartUpdate() {
@@ -61,7 +66,31 @@ export function CartProvider({ children }) {
       const user = app.currentUser;
       const getCart = await user.functions.getCart();
       const cartItems = getCart[0]?.cartItems;
-      if (cartItems && cartItems.length > 0) setCart(cartItems);
+      if (cartItems && cartItems.length > 0) setCart(() => cartItems);
+
+      const query = new URLSearchParams(window.location.search);
+      if (query.get("success")) {
+        if (cartItems && cartItems.length > 0) {
+          console.log("Order placed! You will receive Twilio confirmation.");
+
+          const payload = {
+            user_id: auth0User?.sub || "",
+            items: cartItems,
+            realm_id: user.id,
+            total: cartItems.reduce((acc, item) => acc + item.price, 0)
+          };
+
+          const saveOrder = await user.functions.updateOrder(payload);
+          // console.log(saveOrder)
+          setCart([])
+        } 
+      }
+
+      if (query.get("canceled")) {
+        console.log(
+          "Order canceled -- continue to shop around and checkout when you’re ready."
+        );
+      }
     } catch (error) {
       console.error(error);
     }
@@ -137,25 +166,31 @@ export function CartProvider({ children }) {
     setCart((ct) => ct.filter((item) => item._id !== product._id));
   }
 
+  function handleCartEmpty() {
+    setCart([]);
+  }
+
   function handleUpdateCartOpen() {
     setIsCartOpen(!isCartOpen);
   }
 
   return (
     <CartContext.Provider value={cart}>
-      <CartUpdateContext.Provider value={handleCartUpdate}>
-        <CartAddContext.Provider value={handleCartAdd}>
-          <CartSubtractContext.Provider value={handleCartSubtract}>
-            <CartDeleteContext.Provider value={handleCartDelete}>
-              <IsCartOpenContext.Provider value={isCartOpen}>
-                <UpdateCartOpenContext.Provider value={handleUpdateCartOpen}>
-                  {children}
-                </UpdateCartOpenContext.Provider>
-              </IsCartOpenContext.Provider>
-            </CartDeleteContext.Provider>
-          </CartSubtractContext.Provider>
-        </CartAddContext.Provider>
-      </CartUpdateContext.Provider>
+      <CartEmpty.Provider value={handleCartEmpty}>
+        <CartUpdateContext.Provider value={handleCartUpdate}>
+          <CartAddContext.Provider value={handleCartAdd}>
+            <CartSubtractContext.Provider value={handleCartSubtract}>
+              <CartDeleteContext.Provider value={handleCartDelete}>
+                <IsCartOpenContext.Provider value={isCartOpen}>
+                  <UpdateCartOpenContext.Provider value={handleUpdateCartOpen}>
+                    {children}
+                  </UpdateCartOpenContext.Provider>
+                </IsCartOpenContext.Provider>
+              </CartDeleteContext.Provider>
+            </CartSubtractContext.Provider>
+          </CartAddContext.Provider>
+        </CartUpdateContext.Provider>
+      </CartEmpty.Provider>
     </CartContext.Provider>
   );
 }

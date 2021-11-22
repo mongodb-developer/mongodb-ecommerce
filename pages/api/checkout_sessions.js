@@ -11,7 +11,7 @@ export default async function CreateStripeSession(req, res) {
         success_url: `${req.headers.origin}/?success=true&session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${req.headers.origin}/?canceled=true`,
       });
-      res.json({ id: session.id });
+      res.json({ id: session.id, session });
     } catch (err) {
       res.status(err.statusCode || 500).json(err.message);
     }

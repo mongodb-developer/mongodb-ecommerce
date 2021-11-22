@@ -31,7 +31,20 @@ const joyrideSteps = [
   {
     title: "Welcome to the Store!",
     target: "#joyrideHome",
-    content: "This demo includes just about every MongoDB feature!",
+    content: (
+      <>
+        <p>"This demo includes just about every MongoDB feature!"</p>
+        <br />
+        <p>Be sure to <a href="/api/auth/login" className="text-green-500 hover:underline">Login</a> before beginning the tour!</p>
+      </>),
+  },
+  {
+    title: "3rd Party Integration",
+    target: "#authLogin",
+    content: (
+      <>
+        <p>User authentication is powered by Auth0 and integrates easily with MongoDB!</p>
+      </>),
   },
   {
     title: "All Products Query",
@@ -206,6 +219,23 @@ const joyrideSteps = [
     ),
   },
   {
+    title: "Security",
+    target: "#productGrid",
+    placement: "top-start",
+    placementBeacon: "right",
+    content: (
+      <>
+        <p>When customers add items to the cart and check out, their personal information is encrypted before the data leaves the application.</p>
+        <br/>
+        <p>MongoDB drivers encrypt the most sensitive fields in your documents before they leave the application. </p>
+        <br/>
+        <p>This ensures that data is unreadable to anyone running the database for you, or who has access to the underlying database infrastructure — this includes MongoDB SREs running the Atlas services as well as cloud provider personnel</p>
+        <br/>
+        <p>Traffic from clients to MongoDB clusters are encrypted in-transit using TLS (Transport Layer Security Protocol)</p>
+      </>
+    ),
+  },
+  {
     title: "Data API",
     target: "#productGrid",
     placement: "top-start",
@@ -214,7 +244,7 @@ const joyrideSteps = [
     content: (
       <div className="flex flex-col gap-6">
         <p>
-          In our examples, we have used the MongoDB JavaScript driver to access
+          In our examples, we have used the MongoDB Node.js driver to access
           our database.
         </p>
         <p>
@@ -383,20 +413,42 @@ const joyrideSteps = [
     ),
   },
   {
+    title: "Explore",
+    target: "#mainDiv",
+    placement: "top-start",
+    content: (
+      <>
+        <p className="pb-4">
+          Throughout the site you will see code icons:
+        </p>
+        <button className="z-10 p-2 rounded-full bg-green-600 text-white mx-5 hover:bg-green-500 focus:outline-none focus:bg-green-500">
+          <CodeIcon className="w-5 h-5" />
+        </button>
+        
+        <p className="pt-4">
+          This will show the code snippets for the underlying code of that item.
+        </p>
+      </>
+    ),
+  },
+  {
+    title: "Stripe & Twilio Integraion",
+    target: "#mainDiv",
+    placement: "top-start",
+    content: (
+      <>
+        <p>This site has Stripe integration at checkout and Twilio will send a text message every time an order is placed!</p>
+        <h3 className="py-6 text-black font-bold">Try it out!</h3>
+        <p>After the tour, add an item to your cart and use the provided credit card number to simulate an order.</p>
+      </>
+    ),
+  },
+  {
     title: "Questions?",
     target: "#mainDiv",
     placement: "top-start",
     content: (
       <>
-        <p>
-          Throughout the site you will see code icons:
-          <button className="z-10 p-2 rounded-full bg-green-600 text-white mx-5 hover:bg-green-500 focus:outline-none focus:bg-green-500">
-            <CodeIcon className="w-5 h-5" />
-          </button>
-        </p>
-        <p>
-          This will show the code snippets for the underlying code of that item.
-        </p>
         <p>What do you think? </p>
         <p className="pt-6">
           Interested in building out an app like this? Check out{" "}
@@ -405,7 +457,7 @@ const joyrideSteps = [
             target="_blank"
             className="text-green-500 font-bold"
           >
-            &nbsp;MongoDB Atlas
+            MongoDB Atlas
           </a>
           !
         </p>
@@ -424,15 +476,15 @@ const JoyrideComponent = () => {
   const setAddProduct = useSetAddProduct();
 
   function handleJoyrideCallback({ action, index, status, type }) {
-    if (index === 2 && action === "update" && type === "tooltip") {
+    if (index === 3 && action === "update" && type === "tooltip") {
       categoryRef.current.style.transform = "scale(1)";
     }
 
-    if (index === 2 && action === "next" && type === "step:after") {
+    if (index === 3 && action === "next" && type === "step:after") {
       categoryRef.current.style.transform = "scale(0)";
     }
 
-    if (index === 3 && action === "next" && type === "step:after") {
+    if (index === 4 && action === "next" && type === "step:after") {
       setTimeout(() => {
         setSearchTerm("m");
         setTimeout(() => {
@@ -456,25 +508,25 @@ const JoyrideComponent = () => {
       }, 500);
     }
 
-    if (index === 4 && action === "next" && type === "step:after") {
+    if (index === 5 && action === "next" && type === "step:after") {
       router.push("/search/mAngodb");
     }
 
-    if (index === 5 && action === "update" && type === "tooltip") {
+    if (index === 6 && action === "update" && type === "tooltip") {
       setTimeout(() => {
         setStepIndex((idx) => idx + 1);
       }, 3000);
     }
 
-    if (index === 7 && action === "next" && type === "step:after") {
+    if (index === 8 && action === "next" && type === "step:after") {
       router.push("/dashboard/products");
     }
 
-    if (index === 9 && action === "next" && type === "step:after") {
+    if (index === 10 && action === "next" && type === "step:after") {
       document.getElementById("addProduct").click();
     }
 
-    if (index === 10 && action === "next" && type === "step:before") {
+    if (index === 11 && action === "next" && type === "step:before") {
       setTimeout(() => {
         setAddProduct({
           name: "New Product",
@@ -502,15 +554,15 @@ const JoyrideComponent = () => {
       }, 1000);
     }
 
-    if (index === 13 && action === "next" && type === "step:after") {
+    if (index === 15 && action === "next" && type === "step:after") {
       router.push("/dashboard");
     }
 
-    if (index === 20 && action === "next" && type === "step:before") {
+    if (index === 22 && action === "next" && type === "step:before") {
       window.scrollTo(0, 0);
     }
 
-    if (index === 21 && action === "next" && type === "step:after") {
+    if (index === 23 && action === "next" && type === "step:after") {
       router.push("/");
       setSearchTerm("");
     }

@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import * as Realm from "realm-web";
+import { useSearch, useSetSearch } from "../../../context/SearchContext";
 import Category from "../../../components/storefront/Category";
 import Container from "../../../components/storefront/Container";
 import Footer from "../../../components/storefront/Footer";
@@ -14,6 +15,8 @@ export default function Home() {
   const [categories, setCategories] = useState([]);
   const [categoryName, setCategoryName] = useState("");
   const { query } = useRouter();
+  const searchTerm = useSearch();
+  const setSearchTerm = useSetSearch();
 
   useEffect(async () => {
     // add your Realm App Id to the .env.local file
@@ -45,7 +48,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="bg-white w-full min-h-screen flex flex-col h-screen">
-        <Header />
+        <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         <Container>
           <Category
             category={categoryName}

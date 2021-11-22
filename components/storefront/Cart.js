@@ -1,6 +1,7 @@
-import { useCart } from "../../context/CartContext";
+import { useCart, useCartEmpty } from "../../context/CartContext";
 import { XIcon, ArrowNarrowRightIcon } from "@heroicons/react/outline";
 import CartItem from "./CartItem";
+import { useUser } from "@auth0/nextjs-auth0";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 
@@ -29,11 +30,11 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
       "/api/checkout_sessions",
       lineItems
     );
-    console.log(checkoutSession);
+    // console.log(checkoutSession);
     const result = await stripe.redirectToCheckout({
       sessionId: checkoutSession.data.id,
     });
-    console.log(result);
+    // console.log(result);
   };
 
   return (
@@ -53,10 +54,10 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
       </div>
       <hr className="my-3" />
       {/* Items */}
-      {cart &&
+      {cart.length > 0 ?
         cart.map((item) => {
           return <CartItem key={item._id} product={item} />;
-        })}
+        }) : <span className="italic">Your Cart is Empty</span>}
       {/* Bottom Menu */}
       <div className="mt-8">
         <form className="flex items-center justify-center">
@@ -77,6 +78,12 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
         <span>Chechout</span>
         <ArrowNarrowRightIcon className="w-5 h-5" />
       </a>
+      <div className="pt-4">
+        <h3 className="py-4 text-xl font-bold">Stripe Integration</h3>
+        <p className="pb-4">The Stripe integration is in "Test" mode.</p>
+        <p className="pb-4">To simulate a successful payment, use the following credit card number at checkout:</p>
+        <h4 className="text-green-500 font-bold">4242 4242 4242 4242</h4>
+      </div>
     </div>
   );
 };
