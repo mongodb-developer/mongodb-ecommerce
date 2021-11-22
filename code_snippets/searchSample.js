@@ -1,4 +1,4 @@
-const searchSample = `// JavaScript Driver
+const searchSample = `// Node.js Driver
 
 import clientPromise from "../lib/mongodb";
 

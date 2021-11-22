@@ -1,4 +1,4 @@
-const allProductsSample = `// JavaScript Driver
+const allProductsSample = `// Node.js Driver
 
 import clientPromise from "../lib/mongodb";
 

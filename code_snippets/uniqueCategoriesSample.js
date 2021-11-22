@@ -1,4 +1,4 @@
-const uniqueCategoriesSample = `// JavaScript Driver
+const uniqueCategoriesSample = `// Node.js Driver
 
 import clientPromise from "../lib/mongodb";
 
