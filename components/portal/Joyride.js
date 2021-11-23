@@ -112,7 +112,7 @@ const joyrideSteps = [
         <div className="text-xl">
           Let's try searching for{" "}
           <span className="font-bold">
-            m<em>A</em>ngoDB
+            mong<em>A</em>db
           </span>
         </div>
       </>
@@ -488,17 +488,17 @@ const JoyrideComponent = () => {
       setTimeout(() => {
         setSearchTerm("m");
         setTimeout(() => {
-          setSearchTerm("mA");
+          setSearchTerm("mo");
           setTimeout(() => {
-            setSearchTerm("mAn");
+            setSearchTerm("mon");
             setTimeout(() => {
-              setSearchTerm("mAng");
+              setSearchTerm("mong");
               setTimeout(() => {
-                setSearchTerm("mAngo");
+                setSearchTerm("mongA");
                 setTimeout(() => {
-                  setSearchTerm("mAngod");
+                  setSearchTerm("mongAd");
                   setTimeout(() => {
-                    setSearchTerm("mAngodb");
+                    setSearchTerm("mongAdb");
                   }, 500);
                 }, 400);
               }, 300);
@@ -509,7 +509,7 @@ const JoyrideComponent = () => {
     }
 
     if (index === 5 && action === "next" && type === "step:after") {
-      router.push("/search/mAngodb");
+      router.push("/search/mongAdb");
     }
 
     if (index === 6 && action === "update" && type === "tooltip") {
