@@ -9,7 +9,7 @@ const Product = ({ product }) => {
       <div className="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden cursor-pointer hover:shadow-2xl transition">
         <div className="flex items-end justify-end h-56 w-full bg-cover relative">
           <Image
-            src={product.image}
+            src={product.imagePath}
             alt={product.name}
             layout="fill"
             objectFit="cover"
