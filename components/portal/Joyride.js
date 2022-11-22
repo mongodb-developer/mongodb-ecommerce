@@ -15,6 +15,7 @@ import { useCategory } from "../../context/CategoryContext";
 import { useSetSearch } from "../../context/SearchContext";
 import { useSetAddProduct } from "../../context/AddProductContext";
 import { CodeIcon } from "@heroicons/react/outline";
+import addProductSample from "../../code_snippets/addProductSample";
 
 const joyrideStylesExtraWide = {
   options: {
@@ -29,13 +30,18 @@ const joyrideStyleWide = {
 
 const joyrideSteps = [
   {
-    title: "Welcome to the Store!",
+    title: "Welcome to the MongoStore!",
     target: "#joyrideHome",
     content: (
       <>
-        <p>"This demo includes just about every MongoDB feature!"</p>
+        <p>This demo includes just about every MongoDB feature!</p><br />
+        <p>The MongoStore is an eCommerce demo built to demonstrate most MongoDB features.</p><br />
+        <p>All products listed here, account management capabilities, shopping, and product management are powered by MongoDB. </p><br />
+        <p>This app was written with Next.js. It's hosted on Vercel. And it uses MongoDB Atlas.</p><br />
+        <p>This solution also features MongoDB and code integrations with 3rd party services including Auth0 (for user management), Stripe (for ecommerce), and Twilio for messaging order activity/confirmation.</p><br />
+        <p>After the demonstration, you can find all the code <a href="https://github.com/mongodb-developer/mongodb-ecommerce/tree/development" target="_blank" className="text-green-500 hover:underline">here</a>. You can also hear from members of our community and customers who have built similar solutions <a href="https://http://community.mongodb.com/" target="_blank" className="text-green-500 hover:underline">here</a></p>
         <br />
-        <p>Be sure to <a href="/api/auth/login" className="text-green-500 hover:underline">Login</a> before beginning the tour!</p>
+        <p>Be sure to <a href="/api/auth/login" className="text-green-500 hover:underline">Login</a> before beginning the tour since we'll be accessing a secure section of the site later in the tour!</p>
       </>),
   },
   {
@@ -43,7 +49,8 @@ const joyrideSteps = [
     target: "#authLogin",
     content: (
       <>
-        <p>User authentication is powered by Auth0 and integrates easily with MongoDB!</p>
+        <p>MongoDB support built-in authentication via email/password, Facebook, Google, Apple, and custom JWT authentication.</p><br />
+        <p>For this demo we have implemented user authentication powered by Auth0, an industry leader in website authentication. Auth0 integrates easily with MongoDB via custom JWT authentication.</p>
       </>),
   },
   {
@@ -54,6 +61,7 @@ const joyrideSteps = [
     styles: joyrideStylesExtraWide,
     content: (
       <>
+        <p>Let's talk about how we are connecting to MongoDB. This application is built using Next.js and we are utilizing our `realm-web` SDK to authenticate and read / write to MongoDB.</p><br />
         <p>
           This is the query that displays the current results of all the items
           we have for sale.
@@ -212,9 +220,12 @@ const joyrideSteps = [
     target: ".product:last-of-type",
     placement: "top-start",
     placementBeacon: "right",
+    styles: joyrideStylesExtraWide,
     content: (
       <>
-        <p>Our product was added and the collection automatically refreshed.</p>
+        <p>Our product was added and the collection automatically refreshed.</p><br />
+        <p>Here's the code for inserting our new product:</p>
+        <StyledCode codeString={addProductSample} lang="javascript" />
       </>
     ),
   },
@@ -288,7 +299,8 @@ const joyrideSteps = [
           </a>
           . We’re able to federate queries using a single endpoint to combine
           data across both sources.
-        </p>
+        </p><br />
+        <p>This allows us to bring in product data from various merchants and query this data as a single source.</p>
         <StyledCode codeString={datalakeSample} lang="json" />
       </>
     ),
@@ -321,7 +333,7 @@ const joyrideSteps = [
     styles: joyrideStylesExtraWide,
     content: (
       <>
-        <p>To get up and running quickly, just use an iFrame.</p>
+        <p>To get up and running quickly, just use an iFrame. These can be embedded anywhere!</p>
         <StyledCode codeString={chartsIframe} lang="html" />
       </>
     ),
