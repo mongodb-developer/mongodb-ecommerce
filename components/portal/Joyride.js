@@ -32,6 +32,7 @@ const joyrideSteps = [
   {
     title: "Welcome to the MongoStore!",
     target: "#joyrideHome",
+    styles: joyrideStylesExtraWide,
     content: (
       <>
         <p>This demo includes just about every MongoDB feature!</p><br />

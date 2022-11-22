@@ -3,7 +3,7 @@ import ChartsEmbedSDK from "@mongodb-js/charts-embed-dom";
 
 function DashboardCard03() {
   const sdk = new ChartsEmbedSDK({
-    baseUrl: "https://charts.mongodb.com/charts-mongodb-e-commerce-pbnsa",
+    baseUrl: "https://charts.mongodb.com/charts-reinvent2021-kldzv",
   });
   const currentDate = new Date();
   const chartDiv = useRef(null);
@@ -20,7 +20,7 @@ function DashboardCard03() {
     },
   });
 
-  let chartId = "87460c57-347b-4a25-98f3-ce09de22ddde";
+  let chartId = "618eda56-8473-46ee-8910-ac40fc050013";
   const [chart] = useState(
     sdk.createChart({
       chartId: chartId,
