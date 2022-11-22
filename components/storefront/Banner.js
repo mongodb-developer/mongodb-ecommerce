@@ -2,7 +2,7 @@ import { XIcon } from "@heroicons/react/outline";
 
 const Banner = ({ setShowBanner }) => {
   return (
-    <div className="relative flex justify-center items-center w-screen bg-green-800 py-4 text-lg text-white">
+    <div className="relative flex justify-center items-center bg-green-800 py-4 text-lg text-white" style={{width: "98.9vw"}}>
       <a
         href="https://www.mongodb.com/atlas"
         target="_blank"
