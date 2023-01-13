@@ -8,7 +8,7 @@ function DashboardCard01() {
       <div className="p-5 flex w-full relative">
         <iframe
           className="w-full h-96"
-          src="https://charts.mongodb.com/charts-mongodb-e-commerce-pbnsa/embed/charts?id=f8f62ebd-a046-4800-990e-6f127e16e78e&maxDataAge=3600&theme=light&autoRefresh=true"
+          src="https://charts.mongodb.com/charts-advocacydemoapps-xchkk/embed/charts?id=63c1a36a-23d1-489f-8cec-81a842017436&maxDataAge=3600&theme=light&autoRefresh=true"
         ></iframe>
       </div>
     </div>

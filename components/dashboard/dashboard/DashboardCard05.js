@@ -3,12 +3,12 @@ import ChartsEmbedSDK from "@mongodb-js/charts-embed-dom";
 
 function DashboardCard05() {
   const sdk = new ChartsEmbedSDK({
-    baseUrl: "https://charts.mongodb.com/charts-mongodb-e-commerce-pbnsa",
+    baseUrl: "https://charts.mongodb.com/charts-advocacydemoapps-xchkk",
   });
   const chartDiv = useRef(null);
   const [rendered, setRendered] = useState(false);
 
-  let chartId = "7ec84742-fe22-4ef2-8829-91e9cd06fa31";
+  let chartId = "63c1a92e-281e-4507-8be3-07b69bb7d853";
   let width = "77.7vw";
   let height = "30vw";
   const [chart] = useState(
