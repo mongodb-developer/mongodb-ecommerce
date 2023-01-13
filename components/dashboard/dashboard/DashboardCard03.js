@@ -20,7 +20,7 @@ function DashboardCard03() {
     },
   });
 
-  let chartId = "63c1a6eb-23d1-4887-812c-81a842058d05";
+  let chartId = "63c1a8f3-e13e-4a0f-831d-90c76eeb0b58";
   const [chart] = useState(
     sdk.createChart({
       chartId: chartId,

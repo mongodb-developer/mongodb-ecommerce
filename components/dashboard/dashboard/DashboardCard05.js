@@ -8,7 +8,7 @@ function DashboardCard05() {
   const chartDiv = useRef(null);
   const [rendered, setRendered] = useState(false);
 
-  let chartId = "63c1a92e-281e-4507-8be3-07b69bb7d853";
+  let chartId = "63c1a6eb-23d1-4887-812c-81a842058d05";
   let width = "77.7vw";
   let height = "30vw";
   const [chart] = useState(
