@@ -77,7 +77,8 @@ export function CartProvider({ children }) {
             user_id: auth0User?.sub || "",
             items: cartItems,
             realm_id: user.id,
-            total: cartItems.reduce((acc, item) => acc + item.price, 0)
+            total: cartItems.reduce((acc, item) => acc + item.price, 0),
+            created: new Date()
           };
 
           const saveOrder = await user.functions.updateOrder(payload);
